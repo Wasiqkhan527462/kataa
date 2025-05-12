@@ -1,0 +1,18 @@
+<style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1.page-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+</style>
+
+<h1>New customer</h1>
+
+<%= render "form", customer: @customer %>
+<%= link_to "Cancel", @customer, style: "padding: 8px 16px; background-color: #ccc; color: #000; text-decoration: none; border-radius: 4px; margin-right: 10px;" %>

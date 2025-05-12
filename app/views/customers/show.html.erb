@@ -1,0 +1,166 @@
+<style>
+  body {
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+  }
+
+  h1.page-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 20px;
+  }
+
+  table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  table th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+  }
+
+  table tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .action-bar {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .filter-form {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 15px;
+    justify-content: end;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-select, .form-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+
+  .form-select:focus, .form-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+</style>
+
+
+<h1><%= @customer.name %></h1>
+
+<div>
+<p><strong>Cnic:</strong> <%= @customer.cnic %></p>
+<p><strong>Phone:</strong> <%= @customer.phone_no %></p>
+</div>
+
+<div class="action-bar">
+  <%= form_with url: @customer, method: :get, local: true, html: { class: "filter-form" } do |f| %>
+
+    <div class="form-group">
+      <label>Date:</label>
+      <%= f.date_field :date, value: params[:date], class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <label>Type:</label>
+      <%= f.select :transaction_type, options_for_select(['credit', 'debit'], params[:transaction_type]), { include_blank: 'All' }, class: "form-select" %>
+    </div>
+
+    <div>
+      <%= f.submit 'Filter', class: 'btn-primary' %>
+    </div>
+
+    <div style="margin-bottom: 7px;">
+      <%= link_to 'Reset', @customer, class: 'btn-secondary' %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+<% total_debit = 0 %>
+<% total_credit = 0 %>
+<table>
+  <tr>
+    <th>Date</th>             
+    <th>Type</th>                      
+    <th>Amount</th>
+  </tr>
+  <% @transactions.each do |transaction| %>
+    <% if transaction.transaction_type.downcase == 'debit' %>
+      <% total_debit += transaction.amount %>
+    <% elsif transaction.transaction_type.downcase == 'credit' %>
+      <% total_credit += transaction.amount %>
+    <% end %>
+    <tr>
+      <td><%= transaction.date %></td>         
+      <td><%= transaction.transaction_type %></td>    
+      <td><%= transaction.amount %></td>  
+    </tr>
+  <% end %>
+</table>
+</div>
+<div style="display: flex; flex-direction: column; align-content: flex-end; flex-wrap: wrap; padding-right: 20px">
+<p><strong>Total Credit: </strong><%= total_credit %> Rs</p>
+<p><strong>Total Debit: </strong><%= total_debit %> Rs</p>
+<p><strong>Areas: </strong><%= total_credit - total_debit %> Rs</p>
+</div>
+<div style="margin-top: 30px">
+  <%= link_to "Back", customers_path, style: "padding: 8px 16px; background-color: #ccc; color: #000; text-decoration: none; border-radius: 4px; margin-right: 10px;" %>
+  <%= link_to "Edit", edit_customer_path(@customer), style: "padding: 8px 16px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 4px; margin-right: 10px;" %>
+  <%= button_to "Delete", @customer, method: :delete, data: { turbo_confirm: "Are you sure?" }, style: "margin-top: 15px; padding: 8px 16px; background-color: #dc3545; color: #fff; border: none; border-radius: 4px; cursor: pointer;" %>
+</div>

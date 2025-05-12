@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: 1
+  transaction_type: MyString
+  date: 2025-05-10
+  time: 2025-05-10 11:53:55
+  amount: 1
+
+two:
+  customer: 1
+  transaction_type: MyString
+  date: 2025-05-10
+  time: 2025-05-10 11:53:55
+  amount: 1
