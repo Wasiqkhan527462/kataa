@@ -1,8 +1,7 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:destroy, :edit, :update]
+  before_action :set_transaction, only: [:destroy, :edit, :update, :show]
   def index
     @customers = Customer.all
-  
     @transactions = Transaction.includes(:customer).all
   
     if params[:customer_id].present?
@@ -23,7 +22,9 @@ class TransactionsController < ApplicationController
       @transactions = @transactions.order(date: :desc) 
     end
   end
-  
+
+  def show
+  end
 
   def new
     @transaction = Transaction.new
@@ -60,6 +61,6 @@ class TransactionsController < ApplicationController
       @transaction = Transaction.find(params[:id])
     end
     def transaction_params
-      params.require(:transaction).permit(:customer_id, :transaction_type, :date, :time, :amount)
+      params.require(:transaction).permit(:customer_id, :transaction_type, :date, :time, :featured_image, :amount)
     end
 end

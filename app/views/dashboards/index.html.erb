@@ -64,8 +64,9 @@ h1.page-title {
 
 <div class="action-bar">
     <%= link_to "New Transaction", new_transaction_path, class: "btn-primary" %>
-    <%= link_to "New Customer", new_customer_path, class: "btn-primary" %>
+    <%= link_to "New Customer", new_customer_path, class: "btn-primary", style: "background-color: #18c345" %>
 </div>
+
 <div class="dashboard-row">
   <a href="<%= transactions_path %>" class="dashboard-link">
     <div class="dashboard-card">
@@ -73,7 +74,6 @@ h1.page-title {
       <p style="font-size: 24px; font-weight: bold;"><%= @transactions %></p>
     </div>
   </a>
-
   <a href="<%= customers_path %>" class="dashboard-link">
     <div class="dashboard-card">
       <h2>Total Customers</h2>
@@ -89,7 +89,6 @@ h1.page-title {
       <p style="font-size: 24px; font-weight: bold;"><%= @credit_amount_today %> Rs</p>
     </div>
   </a>
-
   <a href="<%= root_path %>" class="dashboard-link">
     <div class="dashboard-card">
       <h2>Customers Today Debit</h2>
@@ -105,7 +104,6 @@ h1.page-title {
       <p style="font-size: 24px; font-weight: bold;"><%= @credit_amount %> Rs</p>
     </div>
   </a>
-
   <a href="<%= root_path %>" class="dashboard-link">
     <div class="dashboard-card">
       <h2>Customers Total Debit</h2>

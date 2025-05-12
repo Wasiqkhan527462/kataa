@@ -100,7 +100,6 @@
   }
 </style>
 
-
 <h1><%= @customer.name %></h1>
 
 <div>
@@ -154,10 +153,11 @@
   <% end %>
 </table>
 </div>
+
 <div style="display: flex; flex-direction: column; align-content: flex-end; flex-wrap: wrap; padding-right: 20px">
-<p><strong>Total Credit: </strong><%= total_credit %> Rs</p>
-<p><strong>Total Debit: </strong><%= total_debit %> Rs</p>
-<p><strong>Areas: </strong><%= total_credit - total_debit %> Rs</p>
+<p style="color: white; border-radius: 4px; background: red; padding: 10px; font-weight: bold"><strong>Total Credit: </strong><%= total_credit %> Rs</p>
+<p style="color: white; border-radius: 4px; background: green; padding: 10px; font-weight: bold"><strong>Total Debit: </strong><%= total_debit %> Rs</p>
+<p style="color: white; border-radius: 4px; background: orange; padding: 10px; font-weight: bold"><strong>Areas: </strong><%= total_credit - total_debit %> Rs</p>
 </div>
 <div style="margin-top: 30px">
   <%= link_to "Back", customers_path, style: "padding: 8px 16px; background-color: #ccc; color: #000; text-decoration: none; border-radius: 4px; margin-right: 10px;" %>

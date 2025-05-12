@@ -1,0 +1,118 @@
+<style>
+  body {
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+  }
+
+  .transaction-card {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  h1.page-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .card-content p {
+    margin: 10px 0;
+    color: #444;
+    font-size: 1rem;
+  }
+
+  .image-wrapper {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .image-wrapper img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+</style>
+
+<div class="transaction-card">
+  <h1 class="page-title">ID: <%= @transaction.id %></h1>
+  <div class="card-content">
+    <p><strong>Date:</strong> <%= @transaction.date %></p>
+    <p><strong>Time:</strong> <%= @transaction.time.strftime('%I:%M %p') %></p>
+    <p><strong>Customer:</strong> <%= @transaction.customer.name %></p>
+    <p><strong>Type:</strong> <%= @transaction.transaction_type %></p>
+    <p><strong>Amount:</strong> <%= @transaction.amount %></p>
+
+    <% if @transaction.featured_image.attached? %>
+      <div class="image-wrapper">
+        <%= image_tag @transaction.featured_image %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="card-actions">
+    <%= link_to "Back", transactions_path, class: "btn-secondary" %>
+    <%= link_to "Edit", edit_transaction_path(@transaction), class: "btn-primary" %>
+    <%= button_to "Delete", @transaction, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn-danger" %>
+  </div>
+</div>

@@ -131,13 +131,13 @@
     </tr>
     <% @customers.each do |customer| %>
       <tr>
-        <td><%= link_to customer.name, customer, style: "text-decoration: none;" %></td>
+        <td><%= link_to customer.name, customer, style: "text-decoration: none; color: #007bff" %></td>
         <td><%= customer.phone_no %></td>
         <td><%= customer.cnic %></td>
       </tr>
     <% end %>
-    </table>
-    </div>
+  </table>
+</div>
     
 
 

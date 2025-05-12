@@ -28,7 +28,6 @@ class CustomersController < ApplicationController
     end
   end
   
-
   def new
     @customer = Customer.new
   end
