@@ -147,7 +147,7 @@
     <% end %>
     <tr>
       <td><%= transaction.date %></td>         
-      <td><%= transaction.transaction_type %></td>    
+      <td><span style="color: <%= transaction.transaction_type == 'debit' ? 'green' : 'red' %>;"><%= transaction.transaction_type %></span></td>    
       <td><%= transaction.amount %></td>  
     </tr>
   <% end %>

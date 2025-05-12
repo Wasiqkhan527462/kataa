@@ -155,7 +155,7 @@
         <td><%= link_to transaction.date, transaction, style: "text-decoration: none; color: #007bff" %></td>
         <td><%= transaction.customer.name %></td>
         <td><%= transaction.time.strftime('%I:%M %p') %></td>
-        <td><%= transaction.transaction_type %></td>
+        <td><span style="color: <%= transaction.transaction_type == 'debit' ? 'green' : 'red' %>;"><%= transaction.transaction_type %></span></td>
         <td><%= transaction.amount %></td>
         <td>
         <div style="display: flex; width: 10px; gap: 10px">
